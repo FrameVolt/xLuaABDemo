@@ -1,0 +1,7 @@
+require "define"
+
+local speed = 10
+  
+function update()
+	self.transform:Translate(Vector3.forward * Time.deltaTime * speed);
+end

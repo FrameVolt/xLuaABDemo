@@ -1,0 +1,17 @@
+require "define"
+
+
+function start()
+  --print(self);
+  --self.transform:DOMove(Vector3(-2, 2, 0), 1):SetRelative():SetLoops(-1, LoopType.Yoyo);
+  DOTween.To(getter, setter, Vector3(-2, 2, 0), 1):SetRelative():SetLoops(-1, LoopType.Restart);
+end
+
+
+function getter()
+  return self.transform.position;
+end
+
+function setter(x)
+  self.transform.position = x;
+end

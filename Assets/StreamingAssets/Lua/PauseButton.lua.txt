@@ -1,0 +1,10 @@
+require "define"
+--require "UtilFunc"
+
+
+local pauseButtonOBJ;
+
+function awake()
+	pauseButtonOBJ = self.gameObject;
+  
+end

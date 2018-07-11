@@ -1,0 +1,11 @@
+ManifestFileVersion: 0
+CRC: 3654760658
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: pngbundle
+      Dependencies: {}
+    Info_1:
+      Name: prefabbundle
+      Dependencies:
+        Dependency_0: pngbundle

@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 1661264841
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 798e302da26d264ee665402b69b49fe0
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 819f082603b9a0242c38fefc9db4d50d
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/ResourceRaw/Prefabs/Coin.prefab
+Dependencies:
+- E:/lou/Lessons/Lua/xLuaWithAssetBundle/Assets/StreamingAssets/pngbundle

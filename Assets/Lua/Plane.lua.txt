@@ -1,0 +1,14 @@
+require 'define'
+
+local this;
+local observer;
+
+function awake(self)
+  this = self;
+  observer = MyObserver(move, nil);
+  EventManager.StartListening(EventConsts.AXIS_EVENT, observer);
+end
+
+function move(direction)
+  this.transform.position = this.transform.position +  10 * Time.deltaTime * direction;
+end

@@ -1,0 +1,84 @@
+--require "xlua/util"
+require "define"
+local util = require 'xlua.util'
+local yield_return = (require 'cs_coroutine').yield_return
+
+
+local speed = 10;
+local bulletScript;
+local mainCamera;
+local direction;
+local targetPos = {0,0,0};
+
+
+function start()
+    bulletScript = Resources.Load('Bullet.lua');
+    mainCamera = Camera.main;
+end
+
+function update()
+--[[
+  local x = Input.GetAxis("Horizontal");
+  local direction =  x * Vector3.right * Time.deltaTime * speed;
+  self.transform:Translate(direction);
+--]]
+  if Input.GetKeyDown(KeyCode.Space) then
+    local bullet = Instantiate(Bullet, self.transform.position,self.transform.rotation);
+    bullet:SetActive(false);
+    myLuaBehaviour = bullet:AddComponent(typeof(CS.LuaBehaviour));
+    myLuaBehaviour.luaScript = bulletScript;
+    myLuaBehaviour.injections = {};
+    bullet:SetActive(true);
+  end
+  
+  if Input.GetMouseButtonDown(0) then
+    
+    ray = mainCamera:ScreenPointToRay(Input.mousePosition);
+    --[[
+    hits = Physics.RaycastAll(ray)
+    if hits.Length > 0 then
+      --print(hits[0].point);
+      targetPos = hits[0].point;
+      local co = coroutine.create(coroutineMoveTo);
+      coroutine.resume(co, targetPos);
+    end
+    --]]
+    
+    hit = MyPhysics.RaycastWithHit(ray);
+    
+    if hit ~= nil then
+      targetPos = hit.point;
+      local co = coroutine.create(coroutineMoveTo);
+      coroutine.resume(co, targetPos);
+    end
+    
+    --[[
+    local m1 = typeof(Physics):GetMethod('Raycast',{typeof(Ray)},{typeof(RaycastHit)});
+    local f1 = xlua.tofunction(m1);
+    a,b,c = f1(ray);
+    print(a,b,c)
+    --]]
+  end
+  
+  --moveTo(targetPos);
+  
+end
+
+function ondestroy()
+  print("lua destroy")
+end
+--[[
+function moveTo(pos)
+  if Vector3.Distance(self.transform.position, pos) > 0.2 then
+    direction = pos - self.transform.position;
+    direction = direction.normalized;
+    self.transform:Translate(direction * Time.deltaTime * speed);
+  end
+end
+--]]
+function coroutineMoveTo(pos)
+  while Vector3.Distance(self.transform.position, pos) > 0.2 do
+    self.transform.position = Vector3.Lerp(self.transform.position,pos,Time.deltaTime * 2);
+    yield_return(CS.UnityEngine.WaitForSeconds(0));
+  end
+end

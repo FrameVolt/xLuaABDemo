@@ -1,0 +1,4 @@
+function findChild(str)
+	return self.transform:Find(str);
+end
+
